@@ -1,0 +1,19 @@
+name: Deploy page
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy
+      run: |
+        git fetch origin gh-pages
+        git checkout -b gh-pages
+        git rebase master
+        git push -f origin gh-pages
